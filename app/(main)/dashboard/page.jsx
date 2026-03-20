@@ -18,7 +18,7 @@ const defaultAccount = accounts?.find((account) => account.isDefault);
     }
 
   return (
-    <div className='px-5'>
+    <div className='space-y-8'>
         {/* Budget Progress */}
         {defaultAccount && (
             <BudgetProgress
