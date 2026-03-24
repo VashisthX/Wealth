@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
-import useFetch from '@/hooks/use-fetch';
+import useFetch from '@/hooks/useFetch';
 import { format } from 'date-fns';
 import { ChevronDown, ChevronUp, Clock, MoreHorizontal, RefreshCw, Search, Trash, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';

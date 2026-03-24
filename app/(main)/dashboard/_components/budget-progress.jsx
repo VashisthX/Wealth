@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
-import useFetch from '@/hooks/use-fetch';
+import useFetch from '@/hooks/useFetch';
 import { Check, Pencil, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
