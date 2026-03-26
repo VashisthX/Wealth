@@ -5,8 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export async function getCurrentBudget(accountId) {
-    try {
-        const { userId } = await auth();
+  try {
+    const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({
@@ -21,24 +21,29 @@ export async function getCurrentBudget(accountId) {
       where: {
         userId: user.id,
       },
-    }); 
+    });
 
+    // Get current month's expenses
     const currentDate = new Date();
     const startOfMonth = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        1
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      1
     );
     const endOfMonth = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth() + 1,
-        0
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
     );
 
     const expenses = await db.transaction.aggregate({
       where: {
         userId: user.id,
         type: "EXPENSE",
+        date: {
+          gte: startOfMonth,
+          lte: endOfMonth,
+        },
         accountId,
       },
       _sum: {
@@ -52,10 +57,10 @@ export async function getCurrentBudget(accountId) {
         ? expenses._sum.amount.toNumber()
         : 0,
     };
-    } catch (error) {
-        console.error("Error fetching budget:", error);
-        throw error;
-    }
+  } catch (error) {
+    console.error("Error fetching budget:", error);
+    throw error;
+  }
 }
 
 export async function updateBudget(amount) {
